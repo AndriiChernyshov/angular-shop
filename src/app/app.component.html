@@ -16,5 +16,21 @@
   <li>
     <h2><a target="_blank" href="http://angularjs.blogspot.ca/">Angular blog</a></h2>
   </li>
+  <li>{{name}}</li>
+  <li>{{description}}</li>
+  <li>{{price}}</li>
+  <li>{{category}}</li>
+  <li>{{isAvailable}}</li>
 </ul>
-
+<div>Equivalents:
+  <ul>
+    <li *ngFor="let item of equivalents">
+    {{item}}
+  </li>
+  </ul>
+</div>
+<div>Ingredients:
+  <div *ngFor="let item of ingredients">
+    {{item}}
+  </div>
+</div>
