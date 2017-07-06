@@ -1,0 +1,8 @@
+<div *ngIf="product">
+  <h3>{{product.name}} details!</h3>
+  <div><label>id: </label>{{product.id}}</div>
+  <div>
+      <label>name: </label>
+      <input [(ngModel)]="product.name" placeholder="name"/>
+  </div>
+</div>
