@@ -1,14 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Cart } from './components/cart/models/cart.model';
 import { Product } from './components/product/models/product.model';
 
+import { ProductService } from './components/product/product.service'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [ProductService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  constructor(private productService: ProductService) { 
+    
+  }
+  
   title = 'app';
   name = "Angular Shop site";
   description = "Angular Test project";
@@ -25,13 +32,30 @@ export class AppComponent {
     discount: 0
   };
 
-  products = PRODUCTS;
+  products: Product[];
   selectedProduct: Product;
 
-onSelect(product:Product){
-  console.log(product.name);
-  this.selectedProduct = product;
+  listProduct(): void{
+    this.products = this.productService.listProduct();
 }
+
+  onSelect(product:Product){
+    console.log(product.name);
+    this.selectedProduct = product;
+}
+
+  onAddProductToCartClcik(product:Product){
+    this.cart.totalPrice = this.cart.totalPrice + product.price;
+  }
+
+  onClearCartClcik(){
+    this.cart.totalPrice = 0;
+  }
+
+ngOnInit() : void{
+  this.listProduct();
+}
+
 }
 
 enum CategoryTypes{
@@ -40,10 +64,6 @@ enum CategoryTypes{
   Ugly    
 }
 
-const PRODUCTS: Product[] = [
-  { id: 1, name: 'Bread', price: 1.0},
-  { id: 2, name: 'Milk', price: 2.0},
-  { id: 3, name: 'Beer', price: 2.5},
-]
+
 
 

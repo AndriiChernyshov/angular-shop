@@ -3,30 +3,27 @@
   <h1>{{name}}</h1>
   <h2>{{description}}</h2>
 </div>
-<div style="text-align: right">
+<div style="text-align: right" *ngIf="cart.totalPrice > 0">
   Your order: {{cart.totalPrice}} USD
+  <input type="button" name="btnClearCart" (click)="onClearCartClcik()" value="Clear Cart" />
 </div>
-<ul>
-  <li>{{price}}</li>
-  <li>{{category}}</li>
-  <li>{{isAvailable}}</li>
-</ul>
+
+<p>Free shipping after: {{price}}$ !</p>
+<p>Our rating is: {{category}}</p>
+<p>And we are open now: {{isAvailable}}</p>
 <div>Equivalents:
   <ul>
-    <li *ngFor="let item of equivalents">
-    {{item}}
-  </li>
+    <li *ngFor="let item of equivalents">{{item}}</li>
   </ul>
 </div>
 <div>Ingredients:
-  <div *ngFor="let item of ingredients">
-    {{item}}
-  </div>
+  <div *ngFor="let item of ingredients">{{item}}</div>
 </div>
 <h2>Products</h2>
 <ul>
-  <li *ngFor="let product of products" (click)="onSelect(product)">
-    <span>{{product.name}}</span><span> {{product.price}}$</span>
+  <li *ngFor="let product of products">
+    <span>{{product.name}}</span><span> {{product.price}} USD </span>
+    <input type="button" name="btnAddProductToCart" (click)="onAddProductToCartClcik(product)" value="Buy"/>
   </li>
 </ul>
 <product-detail [product]="selectedProduct"></product-detail>
