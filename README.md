@@ -7,6 +7,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 2. You can click on 'Buy' button and put your prouct to the Cart
 3. You can clear your Cart by clicking on 'Clear Cart' button
 4. List of products is hardcoded
-5. to do implement an admin page for product
+5. to do implement an admin page for product.
 
 
