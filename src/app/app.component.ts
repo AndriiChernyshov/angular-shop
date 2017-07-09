@@ -3,19 +3,27 @@ import { Component, OnInit } from '@angular/core';
 import { Cart } from './components/cart/models/cart.model';
 import { Product } from './components/product/models/product.model';
 
-import { ProductService } from './components/product/product.service'
+
+
+import { CartList } from './components/cart/cart-list/models/cart-list.model';
+import { CartItem } from './components/cart/cart-item/models/cart-item.model';
+
+import { ProductService } from './components/product/product.service';
+import { CartService } from './components/cart/cart.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ProductService]
+  providers: [ProductService, CartService]
 })
 export class AppComponent implements OnInit{
-  constructor(private productService: ProductService) { 
+  constructor(private productService: ProductService, private cartService: CartService) { 
     
   }
   
+  
+
   title = 'app';
   name = "Angular Shop site";
   description = "Angular Test project";
@@ -32,6 +40,8 @@ export class AppComponent implements OnInit{
     discount: 0
   };
 
+  cartList : CartList; 
+
   products: Product[];
   selectedProduct: Product;
 
@@ -46,6 +56,7 @@ export class AppComponent implements OnInit{
 
   onAddProductToCartClcik(product:Product){
     this.cart.totalPrice = this.cart.totalPrice + product.price;
+    this.cartService.addProduct(product.id);
   }
 
   onClearCartClcik(){
@@ -54,6 +65,8 @@ export class AppComponent implements OnInit{
 
 ngOnInit() : void{
   this.listProduct();
+  this.cartList = this.cartService.getCart();
+  
 }
 
 }
