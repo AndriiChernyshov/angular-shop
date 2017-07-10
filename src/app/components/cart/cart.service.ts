@@ -33,12 +33,20 @@ export class CartService {
   }
 
   getCart() : CartList{
-
+    console.log('getCart');
+    if(this.cartList == null)
+      return new CartList();
     return this.cartList;
   }
 
   clearCart() : void{
     this.cartList = new CartList();
+  }
+
+  updateCart(updatedCart:CartList) : void{
+    console.log('updateCart');
+    this.cartList = updatedCart;
+
   }
 
   getTotalPrice() : number{

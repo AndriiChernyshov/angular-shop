@@ -12,23 +12,22 @@ import { CartService } from '../cart.service';
   styleUrls: ['./cart-list.component.css']
 })
 export class CartListComponent implements OnInit, OnChanges {
-  public totalPrice : number;
-
+  
   @Input() cartList: CartList;
+  @Input() totalPrice: number;
   @Output() notifyMainForm: EventEmitter<CartList> = new EventEmitter<CartList>();
 
   constructor(private cartService: CartService) { }
 
   ngOnInit() {
-    console.log('car-list on init');
-    this.totalPrice = this.cartService.getTotalPrice();
+    console.log('car-list: on init');
   }
 
   ngOnChanges(changes: SimpleChanges): void{
-    console.log("on chnages hook");
+    console.log("car-list: on changes hook");
   }
 
-  onNotifyCarList(item: CartItem)
+  onNotifyCarListRemoveProduct(item: CartItem)
   {
     console.log("onNotifyCarList " + item.productId);
     console.log(this.cartList.cartItems);
@@ -38,7 +37,10 @@ export class CartListComponent implements OnInit, OnChanges {
       {
         if(item.productId == this.cartList.cartItems[i].productId)
         {
-          this.cartList.cartItems[i].qty = 0;
+
+          this.cartList.cartItems.splice(i, 1);
+
+          //this.cartList.cartItems[i].qty = 0;
         }
       }
     }

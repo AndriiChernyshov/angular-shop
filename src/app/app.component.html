@@ -27,5 +27,5 @@
   </li>
 </ul>
 <product-detail [product]="selectedProduct"></product-detail>
-<app-cart-list [cartList]="cartList"></app-cart-list>
+<app-cart-list [cartList]="cartList" [totalPrice]="cartTotalPrice" (notifyMainForm)="onNotifyMainForm($event)"></app-cart-list>
 

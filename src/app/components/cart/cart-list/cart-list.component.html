@@ -2,7 +2,7 @@
   Your cart contains next items:
 </p>
 <div *ngFor="let item of cartList.cartItems">
-   <app-cart-item [item]='item' (notifyCarList)="onNotifyCarList($event)"></app-cart-item>
+   <app-cart-item [item]='item' (notifyCarListRemoveProduct)="onNotifyCarListRemoveProduct($event)"></app-cart-item>
 </div>
 <div>
   <label>Total price: </label> {{totalPrice}}

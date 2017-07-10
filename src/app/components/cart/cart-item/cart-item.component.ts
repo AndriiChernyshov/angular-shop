@@ -10,7 +10,7 @@ import { CartItem } from './models/cart-item.model';
 export class CartItemComponent implements OnInit {
   @Input() item: CartItem;
 
-  @Output() notifyCarList: EventEmitter<CartItem> = new EventEmitter<CartItem>();
+  @Output() notifyCarListRemoveProduct: EventEmitter<CartItem> = new EventEmitter<CartItem>();
   constructor() { }
 
   ngOnInit() {
@@ -19,7 +19,7 @@ export class CartItemComponent implements OnInit {
   }
 
   onBtnRemoveClick(item){
-    this.notifyCarList.emit(item);
+    this.notifyCarListRemoveProduct.emit(item);
   }
 
 }
