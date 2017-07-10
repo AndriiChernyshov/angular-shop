@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { CartItem } from './models/cart-item.model';
 
@@ -10,10 +10,16 @@ import { CartItem } from './models/cart-item.model';
 export class CartItemComponent implements OnInit {
   @Input() item: CartItem;
 
+  @Output() notifyCarList: EventEmitter<CartItem> = new EventEmitter<CartItem>();
   constructor() { }
 
   ngOnInit() {
-    
+
+
+  }
+
+  onBtnRemoveClick(item){
+    this.notifyCarList.emit(item);
   }
 
 }

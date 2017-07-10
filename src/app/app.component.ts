@@ -57,6 +57,8 @@ export class AppComponent implements OnInit{
   onAddProductToCartClcik(product:Product){
     this.cart.totalPrice = this.cart.totalPrice + product.price;
     this.cartService.addProduct(product.id);
+    this.cartList = this.cartService.getCart();
+    this.cartService.getTotalPrice();
   }
 
   onClearCartClcik(){
@@ -67,6 +69,10 @@ ngOnInit() : void{
   this.listProduct();
   this.cartList = this.cartService.getCart();
   
+}
+
+onNotifyMainForm(list: CartList){
+  console.log(list);
 }
 
 }

@@ -18,4 +18,13 @@ export class ProductService {
     return PRODUCTS;
   }
 
+  findProductById(id:number): Product{
+     for(var i = 0; i < PRODUCTS.length; i++)  
+      {
+          if(PRODUCTS[i].id == id)
+            return PRODUCTS[i];
+      }
+      return null;
+  }
+
 }
