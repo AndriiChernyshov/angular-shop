@@ -1,5 +1,5 @@
 <div *ngIf='item'>
-  <div><label>id:</label>{{item.productId}}</div>
+  <div><label>name:</label>{{itemName}} <label> @ </label>{{itemPrice}} USD</div>
   <div><label>quantity: </label> <input type="number" min="0" step="1" id="numQty" [(ngModel)]="item.qty"  />
   <div><label>need pack as gift: </label> {{item.packAsGift}} </div>
   <input type="button" value="Remove It" (click)="onBtnRemoveClick(item)"/>

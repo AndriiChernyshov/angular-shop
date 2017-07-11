@@ -10,10 +10,10 @@ export class CartService {
   public cartList: CartList;
 
   constructor(private productService: ProductService) { 
-    this.cartList = { cartItems: [ new CartItem(1, 42, true)], name: 'ZZZ' };
+    this.cartList = { cartItems: [ new CartItem(1, 42, true)]};
   }
 
-  addProduct(productId : number){
+  public addProduct(productId : number){
     var cartItem:CartItem = null;
      for(var i = 0; i < this.cartList.cartItems.length; i++)  
       {
@@ -32,29 +32,29 @@ export class CartService {
       }
   }
 
-  getCart() : CartList{
+  public getCart() : CartList{
     console.log('getCart');
     if(this.cartList == null)
       return new CartList();
     return this.cartList;
   }
 
-  clearCart() : void{
+  public clearCart() : void{
     this.cartList = new CartList();
+    this.cartList.cartItems = [];
   }
 
-  updateCart(updatedCart:CartList) : void{
+  public updateCart(updatedCart:CartList) : void{
     console.log('updateCart');
     this.cartList = updatedCart;
 
   }
 
-  getTotalPrice() : number{
+  public getTotalPrice() : number{
     console.log('getTotalPrice');
     let totalPrice:number = 0;
     if(this.cartList && this.cartList.cartItems)
     {
-      console.log(this.cartList.cartItems);
       for(var i = 0; i < this.cartList.cartItems.length; i++)  
       {
         var cartItem = this.cartList.cartItems[i];
@@ -63,9 +63,6 @@ export class CartService {
         if(product)
         {
           totalPrice += cartItem.qty * product.price;
-          console.log(product);
-          console.log(cartItem);
-          console.log(totalPrice);
         }
       }
     }

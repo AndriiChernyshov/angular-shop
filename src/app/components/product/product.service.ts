@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Product } from './models/product.model'
 
-export const PRODUCTS: Product[] = [
+const PRODUCTS: Product[] = [
   { id: 1, name: 'Bread', price: 1.0},
   { id: 2, name: 'Milk', price: 2.0},
   { id: 3, name: 'Beer', price: 2.5}
@@ -14,11 +14,11 @@ export class ProductService {
 
   constructor() { }
 
-  listProduct(): Product[]{
+  public listProduct(): Product[]{
     return PRODUCTS;
   }
 
-  findProductById(id:number): Product{
+  public findProductById(id:number): Product{
      for(var i = 0; i < PRODUCTS.length; i++)  
       {
           if(PRODUCTS[i].id == id)
@@ -26,5 +26,4 @@ export class ProductService {
       }
       return null;
   }
-
 }

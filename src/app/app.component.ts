@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Cart } from './components/cart/models/cart.model';
 import { Product } from './components/product/models/product.model';
-
-
-
 import { CartList } from './components/cart/cart-list/models/cart-list.model';
 import { CartItem } from './components/cart/cart-item/models/cart-item.model';
 
@@ -18,75 +14,51 @@ import { CartService } from './components/cart/cart.service';
   providers: [ProductService, CartService]
 })
 export class AppComponent implements OnInit{
-  constructor(private productService: ProductService, private cartService: CartService) { 
-    
-  }
-  
-  
 
   title = 'app';
   name = "Angular Shop site";
   description = "Angular Test project";
-  price:number = 10;
-  category: CategoryTypes = CategoryTypes.Good;
-  isAvailable:boolean = true;
-
-  equivalents: number[] = [41,42,43,46];
-  ingredients: Array<string> = ["Not bad", "Good", "Wwwweee"];
-
-  cart: Cart = {
-    productIds: [],
-    totalPrice: 0,
-    discount: 0
-  };
-
+  
   cartList : CartList;
   cartTotalPrice: number;
 
   products: Product[];
   selectedProduct: Product;
 
-  listProduct(): void{
-    this.products = this.productService.listProduct();
-}
+  constructor(private productService: ProductService, private cartService: CartService) { 
+  }
 
-  onSelect(product:Product){
-    console.log(product.name);
+  ngOnInit() : void{
+    this.listProduct();
+    this.cartList = this.cartService.getCart();
+    this.cartTotalPrice = this.cartService.getTotalPrice();
+  }
+
+  private listProduct(): void{
+    this.products = this.productService.listProduct();
+  }
+
+  private onSelect(product:Product){
     this.selectedProduct = product;
 }
 
-  onAddProductToCartClcik(product:Product){
-    this.cart.totalPrice = this.cart.totalPrice + product.price;
+  private onAddProductToCartClcik(product:Product){
     this.cartService.addProduct(product.id);
     this.cartList = this.cartService.getCart();
     this.cartTotalPrice = this.cartService.getTotalPrice();
   }
 
-  onClearCartClcik(){
-    this.cart.totalPrice = 0;
+  private onClearCartClcik() :void {
+    this.cartService.clearCart();
+    this.cartList = this.cartService.getCart();
+    this.cartTotalPrice = this.cartService.getTotalPrice();
   }
 
-ngOnInit() : void{
-  this.listProduct();
-  this.cartList = this.cartService.getCart();
-  this.cartTotalPrice = this.cartService.getTotalPrice();
-
-  
-}
-
-onNotifyMainForm(list: CartList){
-  console.log(list);
-  this.cartService.updateCart(list);
-  this.cartList = this.cartService.getCart();
-  this.cartTotalPrice = this.cartService.getTotalPrice();
-}
-
-}
-
-enum CategoryTypes{
-  Good = 1,
-  Bad,
-  Ugly    
+  private onNotifyMainForm(list: CartList){
+    this.cartService.updateCart(list);
+    this.cartList = this.cartService.getCart();
+    this.cartTotalPrice = this.cartService.getTotalPrice();
+  }
 }
 
 

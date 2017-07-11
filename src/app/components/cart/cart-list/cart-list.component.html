@@ -1,10 +1,10 @@
-<p>
+<p *ngIf="cartList.cartItems.length > 0">
   Your cart contains next items:
 </p>
 <div *ngFor="let item of cartList.cartItems">
    <app-cart-item [item]='item' (notifyCarListRemoveProduct)="onNotifyCarListRemoveProduct($event)"></app-cart-item>
 </div>
-<div>
-  <label>Total price: </label> {{totalPrice}}
+<div *ngIf="totalPrice > 0">
+  <label>Total price: </label> {{totalPrice}} USD
 </div>
 
